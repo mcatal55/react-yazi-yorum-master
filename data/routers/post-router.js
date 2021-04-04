@@ -58,13 +58,13 @@ router.get("/:post_id/comments", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const { title, content } = req.body;
+  const { title, content, img_path } = req.body;
   if (!title || !content) {
     res
       .status(401)
       .json({ errorMessage: "Zorunlu alanlar: 'title' ve 'content'" });
   } else {
-    DB.addPost({ title, content })
+    DB.addPost({ title, content, img_path })
       .then((post) => {
         res.status(201).json(post);
       })
