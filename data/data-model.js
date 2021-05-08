@@ -68,11 +68,19 @@ function addPost(newPost) {
 
 function addProduct(newProduct) {
   return db("product")
-    .insert(newProduct, "name")
-    .then(([name]) => {
-      return db("product").where({ name }).first();
+    .insert(newProduct, "id")
+    .then(([id]) => {
+      return db("product").where({ id }).first();
     });
 }
+
+// function addProduct(newProduct) {
+//   return db("product")
+//     .insert(newProduct, "name")
+//     .then(([name]) => {
+//       return db("product").where({ name }).first();
+//     });
+// }
 
 function addOrder(newOrder) {
   return db("order")
