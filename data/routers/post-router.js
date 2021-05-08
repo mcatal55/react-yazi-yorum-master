@@ -15,18 +15,6 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/product", (req, res) => {
-  DB.findProducts()
-    .then((posts) => {
-      res.status(200).json(posts);
-    })
-    .catch((e) => {
-      res
-        .status(500)
-        .json({ errorMessage: "Yazilar yuklenirken hata olustu", error: e });
-    });
-});
-
 router.get("/latest-comments", (req, res) => {
   DB.findComments()
     .then((comments) => {
@@ -77,25 +65,6 @@ router.post("/", (req, res) => {
       .json({ errorMessage: "Zorunlu alanlar: 'title' ve 'content'" });
   } else {
     DB.addPost({ title, content, img_path })
-      .then((post) => {
-        res.status(201).json(post);
-      })
-      .catch((e) => {
-        res
-          .status(500)
-          .json({ errorMessage: "Yazi eklerken hata olustu", error: e });
-      });
-  }
-});
-
-router.post("/product", (req, res) => {
-  const { name } = req.body;
-  if (!name || !content) {
-    res
-      .status(401)
-      .json({ errorMessage: "Zorunlu alanlar: 'title' ve 'content'" });
-  } else {
-    DB.addProduct({ name})
       .then((post) => {
         res.status(201).json(post);
       })
