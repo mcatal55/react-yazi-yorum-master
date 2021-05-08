@@ -12,6 +12,7 @@ const postRouter = require("../data/routers/post-router");
 
 router.use("/posts", postRouter);
 // router.use("/", userRouter);
+router.use("/products", postRouter);
 
 router.get("/", (req, res) => {
   res.status(200).json({ server: "up" });
