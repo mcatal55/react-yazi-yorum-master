@@ -68,9 +68,9 @@ function addPost(newPost) {
 
 function addProduct(newProduct) {
   return db("product")
-    .insert(newProduct, "title")
-    .then(([title]) => {
-      return db("post").where({ title }).first();
+    .insert(newProduct, "name")
+    .then(([name]) => {
+      return db("product").where({ name }).first();
     });
 }
 

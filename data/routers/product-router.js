@@ -27,6 +27,25 @@ router.get("/", (req, res) => {
     });
 });
 
+router.post("/", (req, res) => {
+  const { name } = req.body;
+  if (!name) {
+    res
+      .status(401)
+      .json({ errorMessage: "Zorunlu alanlar: 'name'" });
+  } else {
+    DB.addProduct({ name })
+      .then((post) => {
+        res.status(201).json(post);
+      })
+      .catch((e) => {
+        res
+          .status(500)
+          .json({ errorMessage: "Yazi eklerken hata olustu", error: e });
+      });
+  }
+});
+
 // router.get("/latest-comments", (req, res) => {
 //   DB.findComments()
 //     .then((comments) => {
