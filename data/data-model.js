@@ -5,10 +5,12 @@ module.exports = {
   addUser,
   findPosts,
   findProducts,
+  findOrders,
   findPostById,
   findComments,
   findCommentsByPost,
   addPost,
+  addOrder,
   addProduct,
   addComment,
   updatePost,
@@ -38,6 +40,10 @@ function findProducts() {
   return db("product");
 }
 
+function findOrders() {
+  return db("order");
+}
+
 function findPostById(id) {
   return db("post").where({ id }).first();
 }
@@ -58,11 +64,21 @@ function addPost(newPost) {
     });
 }
 
+
+
 function addProduct(newProduct) {
   return db("product")
     .insert(newProduct, "title")
     .then(([title]) => {
       return db("post").where({ title }).first();
+    });
+}
+
+function addOrder(newOrder) {
+  return db("order")
+    .insert(newOrder, "name")
+    .then(([name]) => {
+      return db("post").where({ name }).first();
     });
 }
 
