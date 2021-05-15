@@ -34,7 +34,7 @@ router.post("/", (req, res) => {
       .status(401)
       .json({ errorMessage: "Zorunlu alanlar: 'product_id', 'quantity'" });
   } else {
-    DB.addProduct({ product_id, quantity })
+    DB.addOrder({ product_id, quantity })
       .then((order) => {
         res.status(201).json(order);
       })
