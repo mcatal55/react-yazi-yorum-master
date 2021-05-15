@@ -41,7 +41,7 @@ function findProducts() {
 }
 
 function findOrders() {
-  return db("order");
+  return db("orders");
 }
 
 function findPostById(id) {
@@ -74,6 +74,14 @@ function addProduct(newProduct) {
     });
 }
 
+function addOrder(newOrder) {
+  return db("orders")
+    .insert(newOrder, "id")
+    .then(([id]) => {
+      return db("orders").where({ id }).first();
+    });
+}
+
 // function addProduct(newProduct) {
 //   return db("product")
 //     .insert(newProduct, "name")
@@ -82,13 +90,6 @@ function addProduct(newProduct) {
 //     });
 // }
 
-function addOrder(newOrder) {
-  return db("order")
-    .insert(newOrder, "name")
-    .then(([name]) => {
-      return db("post").where({ name }).first();
-    });
-}
 
 function addComment(newComment) {
   return db("comment")

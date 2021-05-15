@@ -17,8 +17,8 @@ const DB = require("../data-model");
 
 router.get("/", (req, res) => {
   DB.findOrders()
-    .then((posts) => {
-      res.status(200).json(posts);
+    .then((orders) => {
+      res.status(200).json(orders);
     })
     .catch((e) => {
       res
@@ -28,15 +28,15 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const { name, quantity } = req.body;
-  if (!name || !quantity) {
+  const { product_id, quantity } = req.body;
+  if (!product_id || !quantity) {
     res
       .status(401)
-      .json({ errorMessage: "Zorunlu alanlar: 'title' ve 'content'" });
+      .json({ errorMessage: "Zorunlu alanlar: 'product_id', 'quantity'" });
   } else {
-    DB.addOrder({ title, content, img_path })
-      .then((post) => {
-        res.status(201).json(post);
+    DB.addProduct({ product_id, quantity })
+      .then((order) => {
+        res.status(201).json(order);
       })
       .catch((e) => {
         res
